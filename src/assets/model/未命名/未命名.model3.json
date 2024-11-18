@@ -1,21 +1,26 @@
 {
-  "Version": 3,
-  "FileReferences": {
-    "Moc": "未命名.moc3",
-    "Textures": ["未命名.8192/texture_00.png"],
-    "Physics": "未命名.physics3.json",
-    "DisplayInfo": "未命名.cdi3.json"
-  },
-  "Groups": [
-    {
-      "Target": "Parameter",
-      "Name": "EyeBlink",
-      "Ids": ["ParamEyeLOpen", "ParamEyeROpen", "Param7"]
-    },
-    {
-      "Target": "Parameter",
-      "Name": "LipSync",
-      "Ids": ["ParamMouthForm", "ParamMouthOpenY"]
-    }
-  ]
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "JCI_rig_v30.moc3",
+		"Textures": [
+			"JCI_rig_v30.2048/texture_00.png"
+		],
+		"Physics": "JCI_rig_v30.physics3.json",
+		"DisplayInfo": "JCI_rig_v30.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		}
+	]
 }
