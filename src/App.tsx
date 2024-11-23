@@ -262,7 +262,7 @@ function App() {
         {/*Live2D Model Container*/}
         <div
           id="elmaContainer"
-          className="flex flex-col w-[30%] 2xl:w-[40%] sm:visible invisible items-start"
+          className="flex flex-col w-[50%] 2xl:w-[40%] sm:visible invisible items-start"
         >
           <div className="h-1/3 w-full flex items-center justify-end p-5 2xl:p-20 z-50">
             <div className="w-[600px]">
@@ -279,145 +279,37 @@ function App() {
             <Live2DField emotion={emotion} audioData={audioData} />
           </div>
         </div>
-
-        <div className="flex flex-col w-[70%] 2x:w-[60%] p-1 items-center justify-center z-10">
-          <TabsSwitch>
-            {/*Chat Box*/}
-            <Tab name="chatbot">
-              <div className="w-full h-full grid grid-cols-1 grid-rows-6 gap-4">
-                <Upperfield />
-                <div className="row-span-5 bg-neutral-600 rounded-lg p-4">
-                  <MessagesArea
-                    loading={stopInput.current}
-                    speaking={speaking}
-                  />
-                  <div className="flex flex-row mt-1">
-                    <span
-                      className={`w-2 h-2  bg-green-400
-                       rounded-full mx-1`}
-                      id="on/off button dot"
-                    ></span>
-                    <span
-                      className="w-2 h-2 bg-yellow-300 rounded-full"
-                      id="on/off button dot"
-                    ></span>
-                  </div>
-                </div>
-                <div className="row-start-8">
-                  <InputField
-                    handleUserSubmit={handleUserSubmit}
-                    stopInput={stopInput.current}
-                    handleSTTStart={handleSTTStart}
-                    handleSTTEnd={handleSTTEnd}
-                    speaking={speaking}
-                    recognizedSpeech={recognizedSpeech} //TODO: disable speech
-                  />
-                </div>
+        {/*chatroom*/}
+        <div className="w-[50%] 2xl:w-[60%] p-1 items-end justify-center z-10 ml-auto">
+          <div className="w-full h-full grid grid-cols-1 grid-rows-6 gap-4">
+            <Upperfield />
+            <div className="row-span-5 bg-neutral-600 rounded-lg p-4">
+              <MessagesArea loading={stopInput.current} speaking={speaking} />
+              <div className="flex flex-row mt-1">
+                <span
+                  className={`w-2 h-2 bg-green-400 rounded-full mx-1`}
+                  id="on/off button dot"
+                ></span>
+                <span
+                  className="w-2 h-2 bg-yellow-300 rounded-full"
+                  id="on/off button dot"
+                ></span>
               </div>
-            </Tab>
-            {/*Image Generate Box*/}
-            <Tab name="imageGenerator">
-              <div className="w-full h-full grid grid-cols-1 grid-rows-6 gap-4">
-                <Upperfield />
-                <div>
-                  <InputField
-                    model={Model.dalle_3}
-                    handleUserSubmit={handleUserSubmit}
-                    stopInput={stopInput.current}
-                    handleSTTStart={handleSTTStart}
-                    handleSTTEnd={handleSTTEnd}
-                    speaking={speaking}
-                    recognizedSpeech={recognizedSpeech} //TODO: disable speech
-                  />
-                </div>
-
-                <div className="row-span-4 grid grid-cols-2 rounded-lg mx-4 mb-4 gap-2 ">
-                  {/* Area for displaying generated images */}
-                  <div className="relative w-full h-full">
-                    <div className="text-white text-2xl font-bold mr-4">
-                      <div className="mb-2">
-                        <span>Prompt:</span>
-                      </div>
-                      <textarea
-                        className="text-black w-full rounded-xl resize-none min-h-[130px] 2xl:min-h-[200px] text-sm"
-                        value={targetImagePrompt}
-                        readOnly
-                      ></textarea>
-                    </div>
-
-                    <div className=" relative w-full  min-h-[250px] 2xl:min-h-[300px]  overflow-y-auto px-2">
-                      <div
-                        className="absolute w-full h-full left-0 right-0 ml-auto mr-auto flex justify-center"
-                        onClick={openModal}
-                      >
-                        <div className="relative w-full h-full ">
-                          <div className="flex flex-col ">
-                            <div className="bg-neutral-800 rounded-lg p-4 absolute left-0 right-0  z-10 flex   justify-center items-center group w-full h-full overflow-hidden">
-                              {loading ? (
-                                <div className="bg-black  w-full h-full flex items-center justify-center">
-                                  <LoadingMessage loadingMsg="Elma are thinking。。。" />
-                                </div>
-                              ) : (
-                                <img
-                                  className="bg-gray-700 w-full h-full z-10 object-cover"
-                                  src={imageMessage}
-                                  alt="image expired.Please generate other image"
-                                  onError={({ currentTarget }) => {
-                                    currentTarget.onerror = null; // prevents looping
-                                    currentTarget.src = demoImage;
-                                    setDefaultImage(true);
-                                  }}
-                                />
-                              )}
-
-                              <div className="absolute bg-whiteTransparent w-full h-full z-20 opacity-0 group-hover:opacity-100 flex items-center justify-center text-2xl">
-                                <span>{t("openImage")}</span>
-                              </div>
-                              <div className="absolute bottom-1 right-16 flex flex-row">
-                                <span
-                                  className={`w-2 h-2 ${
-                                    defaultImage
-                                      ? "bg-red-600"
-                                      : " bg-green-400"
-                                  } rounded-full mx-1`}
-                                  id="on/off button dot"
-                                ></span>
-                                <span
-                                  className="w-2 h-2 bg-yellow-300 rounded-full"
-                                  id="on/off button dot"
-                                ></span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* <div className="relative -left-14">
-                      <button
-                        className="text-white rounded-xl bg-indigo-400 w-32 mr-4"
-                        onClick={displayPrevImage}
-                      >
-                        Previous Image
-                      </button>
-                      <button
-                        className="text-white rounded-xl bg-indigo-400 w-32"
-                        onClick={displayNextImage}
-                      >
-                        Next Image
-                      </button>
-                    </div> */}
-                  </div>
-
-                  <div className="border-indigo-600 border-4 overflow-y-auto px-2">
-                    <SpecialPrompts />
-                    <SuggestPrompts />
-                  </div>
-                </div>
-              </div>
-            </Tab>
-          </TabsSwitch>
+            </div>
+            <div className="row-start-8">
+              <InputField
+                handleUserSubmit={handleUserSubmit}
+                stopInput={stopInput.current}
+                handleSTTStart={handleSTTStart}
+                handleSTTEnd={handleSTTEnd}
+                speaking={speaking}
+                recognizedSpeech={recognizedSpeech} //TODO: disable speech
+              />
+            </div>
+          </div>
         </div>
       </div>
+
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -431,59 +323,6 @@ function App() {
           >
             <div className="fixed inset-0 bg-black/25" />
           </Transition.Child>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="min-h-[500px] min-w-[900px] max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    {t("imageGenerator")}
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <div className="bg-whiteTransparent flex justify-center items-center">
-                      <img
-                        className="bg-gray-700 w-full h-full  z-10 object-cover"
-                        src={imageMessage}
-                        alt="No images generated"
-                        onError={({ currentTarget }) => {
-                          currentTarget.onerror = null; // prevents looping
-                          currentTarget.src = demoImage;
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={handleDownloadImage}
-                    >
-                      {t("download")}
-                    </button>
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 mx-2"
-                      onClick={closeModal}
-                    >
-                      {t("close")}
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
         </Dialog>
       </Transition>
       <GeneralInfoModal />
