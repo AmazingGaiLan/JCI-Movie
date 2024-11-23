@@ -9,11 +9,10 @@ import { useTranslation } from "react-i18next";
 //#endregion
 
 const openaiApi = axios.create({
-  // headers: {
-  //   Authorization:
-  //     "Bearer " + Base64.decode(import.meta.env.VITE_OPENAI_API_KEY),
-  //   "Content-Type": "application/json",
-  // },
+  headers: {
+    Authorization: "Bearer " + import.meta.env.VITE_OPENAI_API_KEY,
+    "Content-Type": "application/json",
+  },
 });
 
 /* const configuration = new Configuration({
@@ -68,7 +67,7 @@ const getOutput = async (
 
     await openaiApi
       // .post(import.meta.env.VITE_OPENAI_API_URL, params)
-      .post(import.meta.env.VITE_ELMAGPT_SERVER_API_CHATBOT_URL, params)
+      .post(import.meta.env.VITE_OPENAI_API_URL, params)
       .then((response) => {
         output = response.data.choices[0].message?.content;
       })

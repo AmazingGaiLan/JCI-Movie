@@ -50,7 +50,6 @@ function Live2DField(props: Live2DFieldProps) {
       //   "https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/haru/haru_greeter_t03.model3.json"
       // );
 
-
       model = await Live2DModel.from(
         "https://raw.githubusercontent.com/AmazingGaiLan/JCI-Movie/master/src/assets/model/v33/v33/JCI_rig_v33.model3.json"
       );
