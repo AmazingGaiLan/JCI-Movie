@@ -46,12 +46,12 @@ function Live2DField(props: Live2DFieldProps) {
     app.renderer.plugins.interaction.destroy(); // Remove the default interaction manager
 
     const loadModels = async () => {
-      // model = await Live2DModel.from(
-      //   "https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/haru/haru_greeter_t03.model3.json"
-      // );
       model = await Live2DModel.from(
-        "https://raw.githubusercontent.com/alexlam184/emla-chat-web/master/src/assets/model/%E6%9C%AA%E5%91%BD%E5%90%8D/%E6%9C%AA%E5%91%BD%E5%90%8D.model3.json"
+        "https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/haru/haru_greeter_t03.model3.json"
       );
+      // model = await Live2DModel.from(
+      //   "https://raw.githubusercontent.com/alexlam184/emla-chat-web/master/src/assets/model/%E6%9C%AA%E5%91%BD%E5%90%8D/%E6%9C%AA%E5%91%BD%E5%90%8D.model3.json"
+      // );
       app.stage.addChild(model);
 
       model.scale.set(0.5);
