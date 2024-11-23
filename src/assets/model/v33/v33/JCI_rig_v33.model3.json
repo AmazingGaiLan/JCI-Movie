@@ -1,0 +1,26 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "JCI_rig_v33.moc3",
+		"Textures": [
+			"JCI_rig_v33.2048/texture_00.png"
+		],
+		"Physics": "JCI_rig_v33.physics3.json",
+		"DisplayInfo": "JCI_rig_v33.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		}
+	]
+}
